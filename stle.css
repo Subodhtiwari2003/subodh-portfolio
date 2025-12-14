@@ -1,141 +1,125 @@
-/* ---------- Base Styles ---------- */
-body {
-  font-family: Arial, Helvetica, sans-serif;
+* {
   margin: 0;
-  line-height: 1.7;
-  color: #1f2937;
-  background-color: #ffffff;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-a {
-  color: #2563eb;
+body {
+  color: #1f2933;
+  line-height: 1.6;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: #0f172a;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  color: white;
+  font-weight: bold;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+.navbar li {
+  margin-left: 20px;
+}
+
+.navbar a {
+  color: white;
   text-decoration: none;
+  font-size: 14px;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-/* ---------- Hero Section ---------- */
+/* HERO */
 .hero {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: linear-gradient(135deg, #0f172a, #020617);
   color: white;
   text-align: center;
   padding: 80px 20px;
 }
 
 .hero h1 {
-  font-size: 44px;
-  margin-bottom: 10px;
+  font-size: 42px;
 }
 
 .hero h2 {
   font-weight: 400;
-  margin-bottom: 10px;
-  opacity: 0.95;
+  margin: 10px 0;
 }
 
-.hero p {
-  max-width: 700px;
-  margin: 0 auto 25px;
-  opacity: 0.9;
-}
-
-/* ---------- Buttons ---------- */
 .buttons a {
   display: inline-block;
-  margin: 8px;
+  margin: 10px;
   padding: 10px 18px;
   background: #2563eb;
   color: white;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: all 0.2s ease;
+  text-decoration: none;
+  border-radius: 4px;
 }
 
-.buttons a:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-}
-
-/* ---------- Sections ---------- */
+/* SECTIONS */
 .section {
   max-width: 900px;
   margin: auto;
   padding: 60px 20px;
 }
 
+.section.alt {
+  background: #f9fafb;
+}
+
 .section h3 {
-  font-size: 26px;
   margin-bottom: 20px;
-  color: #0f172a;
+  font-size: 26px;
 }
 
-/* ---------- Skills ---------- */
-.skills {
+/* SKILLS */
+.skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 12px;
-  list-style: none;
-  padding: 0;
 }
 
-.skills li {
-  background: #f8fafc;
-  padding: 10px 14px;
-  border-left: 4px solid #2563eb;
+.skills-grid span {
+  background: #e5e7eb;
+  padding: 8px;
+  text-align: center;
+  border-radius: 4px;
   font-size: 14px;
 }
 
-/* ---------- Experience ---------- */
-.section ul {
-  padding-left: 20px;
-}
-
-.section ul li {
-  margin-bottom: 8px;
-}
-
-/* ---------- Projects ---------- */
+/* PROJECTS */
 .project {
-  background: #f9fafb;
   border-left: 4px solid #2563eb;
-  padding: 16px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding-left: 15px;
+  margin-bottom: 25px;
 }
 
 .project h4 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  color: #111827;
-}
-
-.project p {
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin-bottom: 6px;
 }
 
 .project a {
-  font-weight: 600;
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: bold;
 }
 
-.project:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* ---------- Contact ---------- */
-.section p {
-  font-size: 15px;
-}
-
-/* ---------- Footer ---------- */
+/* FOOTER */
 footer {
   text-align: center;
-  padding: 25px;
-  background: #f3f4f6;
-  font-size: 14px;
-  color: #374151;
+  padding: 20px;
+  background: #e5e7eb;
 }
+
