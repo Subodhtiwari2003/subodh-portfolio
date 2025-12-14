@@ -4,112 +4,114 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Subodh Tiwari | Data Scientist</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar">
-  <div class="logo">Subodh Tiwari</div>
-  <ul>
+  <div class="logo">Subodh</div>
+  <ul class="nav-links">
     <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <section id="home" class="hero">
-  <h1>Subodh Tiwari</h1>
-  <h2>Data Scientist | AI/ML Engineer</h2>
-  <p>Turning data into decisions and AI into impact</p>
-  <div class="buttons">
-    <a href="#projects">View Projects</a>
-    <a href="assets/Subodh_Resume.pdf" target="_blank">Resume</a>
-    <a href="https://github.com/Subodhtiwari2003" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank">LinkedIn</a>
+  <div class="hero-content">
+    <h1 class="fade-in">Subodh Tiwari</h1>
+    <h2 class="slide-in">Data Scientist | AI/ML Engineer</h2>
+    <p class="fade-in-delay">
+      Building data-driven & AI-powered solutions that create real business impact.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#projects" class="btn primary">View Projects</a>
+      <a href="assets/resume.pdf" class="btn secondary" target="_blank">Download Resume</a>
+    </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="section">
-  <h3>About Me</h3>
-  <p>
-    I am a Data Scientist with experience in predictive modeling, analytics,
-    dashboards, and AI-driven systems. Currently working at Innodata, I focus
-    on transforming complex datasets into actionable insights and automating
-    workflows to support business decision-making.
-  </p>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="section alt">
-  <h3>Skills</h3>
-  <div class="skills-grid">
-    <span>Python</span>
-    <span>SQL</span>
-    <span>MS Excel</span>
-    <span>Power BI</span>
-    <span>Scikit-learn</span>
-    <span>NLP</span>
-    <span>LangChain</span>
-    <span>LangGraph</span>
-    <span>RAG Pipelines</span>
-    <span>MLflow</span>
-    <span>Docker</span>
-    <span>AWS</span>
-  </div>
-</section>
-
-<!-- PROJECTS -->
+<!-- ================= PROJECTS ================= -->
 <section id="projects" class="section">
-  <h3>Projects</h3>
+  <h3 class="section-title">Projects</h3>
 
-  <div class="project">
-    <h4>AutoML Pipeline</h4>
-    <p>End-to-end automated ML workflow for preprocessing, model selection, tuning, and evaluation.</p>
-    <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank">GitHub →</a>
-  </div>
+  <div class="projects-grid">
 
-  <div class="project">
-    <h4>RAG Pipeline with Gemini</h4>
-    <p>Production-ready Retrieval-Augmented Generation system with observability and vector search.</p>
-    <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank">GitHub →</a>
-  </div>
+    <div class="project-card">
+      <h4>AutoML Pipeline</h4>
+      <p>End-to-end ML automation with feature engineering, tuning & MLflow tracking.</p>
+      <span>Python • Scikit-learn • MLflow • Docker</span>
+      <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank">View Project →</a>
+    </div>
 
-  <div class="project">
-    <h4>LangChain Gemini LLM App</h4>
-    <p>Multi-module GenAI app including QA, document analysis, and vision-based extraction.</p>
-    <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank">GitHub →</a>
-  </div>
+    <div class="project-card">
+      <h4>Email Spam Classifier</h4>
+      <p>95%+ accuracy NLP-based spam detection deployed using Streamlit.</p>
+      <span>NLP • TF-IDF • Naive Bayes • Streamlit</span>
+      <a href="https://github.com/Subodhtiwari2003/Email-Spam-classifier" target="_blank">View Project →</a>
+    </div>
 
-  <div class="project">
-    <h4>Email Spam Classifier</h4>
-    <p>NLP-based spam detection system with 95%+ accuracy.</p>
-    <a href="https://github.com/Subodhtiwari2003/Email-Spam-classifier" target="_blank">GitHub →</a>
-  </div>
+    <div class="project-card">
+      <h4>Boston House Pricing</h4>
+      <p>Regression model with feature engineering and Flask deployment.</p>
+      <span>Regression • Flask • EDA</span>
+      <a href="https://github.com/Subodhtiwari2003/bostonhousepricing" target="_blank">View Project →</a>
+    </div>
 
-  <div class="project">
-    <h4>ATS Resume Tracking System</h4>
-    <p>AI-powered ATS resume screening and ranking application.</p>
-    <a href="https://github.com/Subodhtiwari2003/ATS-Resume-Tracking-project" target="_blank">GitHub →</a>
+    <div class="project-card">
+      <h4>RAG Pipeline (Gemini)</h4>
+      <p>Production-ready RAG system with observability and vector search.</p>
+      <span>LangChain • Gemini • ChromaDB</span>
+      <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <h4>ATS Resume Tracker</h4>
+      <p>AI-powered ATS resume evaluation and scoring system.</p>
+      <span>Python • NLP • ML</span>
+      <a href="https://github.com/Subodhtiwari2003/ATS-Resume-Tracking-project" target="_blank">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <h4>LangChain Gemini LLM App</h4>
+      <p>Multi-app LLM platform with chat, vision, QA & invoice extraction.</p>
+      <span>LangChain • Gemini Pro • FastAPI</span>
+      <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank">View Project →</a>
+    </div>
+
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section alt">
-  <h3>Contact</h3>
-  <p>Email: <a href="mailto:kumarsubodh150403@gmail.com">kumarsubodh150403@gmail.com</a></p>
-  <p>Phone: +91-9873559651</p>
-  <p>GitHub: <a href="https://github.com/Subodhtiwari2003" target="_blank">github.com/Subodhtiwari2003</a></p>
-  <p>LinkedIn: <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank">linkedin.com/in/subodh-tiwari-</a></p>
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section contact">
+  <h3 class="section-title">Contact Me</h3>
+
+  <form class="contact-form">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="5"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  <div class="socials">
+    <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Subodhtiwari2003" target="_blank">GitHub</a>
+    <a href="mailto:kumarsubodh150403@gmail.com">Email</a>
+  </div>
 </section>
 
 <footer>
-  <p>© 2025 Subodh Tiwari</p>
+  © 2025 Subodh Tiwari • Built with ❤️
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
