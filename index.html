@@ -2,130 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Subodh Tiwari | Data Scientist</title>
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
-  <div class="logo">Subodh.</div>
+  <div class="logo">Subodh</div>
   <ul>
     <li><a href="#home">Home</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#github">GitHub</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button id="theme-toggle">🌙</button>
+  <button id="themeToggle">🌙</button>
 </nav>
 
-<!-- HOME -->
+<!-- ===== HOME ===== -->
 <section id="home" class="home">
   <div class="home-content">
+    <img src="assets/profile.jpg" alt="Subodh Tiwari" class="profile-pic"/>
+
     <h1>Subodh Tiwari</h1>
     <h2>Data Scientist | AI/ML Engineer</h2>
     <p>
-      I build data-driven, ML-powered, and GenAI solutions that
-      turn complex data into business impact.
+      I build data-driven and AI-powered solutions using Machine Learning,
+      Analytics, and Generative AI to solve real-world business problems.
     </p>
 
     <div class="home-buttons">
-      <a href="#projects" class="btn">View Projects</a>
-      <a href="assets/resume.pdf" target="_blank" class="btn-outline">Download Resume</a>
+      <a href="assets/resume.pdf" target="_blank" class="btn">Download Resume</a>
+      <a href="https://github.com/Subodhtiwari2003" target="_blank" class="btn secondary">GitHub</a>
     </div>
-  </div>
-
-  <div class="home-image">
-    <img src="assets/profile.jpg" alt="Subodh Tiwari">
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="projects">
+<!-- ===== PROJECTS ===== -->
+<section id="projects" class="section">
   <h2 class="section-title">Projects</h2>
 
   <div class="project-grid">
 
     <div class="project-card">
       <h3>AutoML Pipeline</h3>
-      <p>
-        End-to-end automated ML workflow with preprocessing, feature engineering,
-        model selection, tuning, and MLflow tracking.
-      </p>
+      <p>End-to-end AutoML framework automating preprocessing, feature selection, model tuning.</p>
       <span>Python · Scikit-learn · MLflow · Docker</span>
-      <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank">View on GitHub</a>
+      <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank">View Project</a>
     </div>
 
     <div class="project-card">
       <h3>RAG Pipeline (Gemini)</h3>
-      <p>
-        Production-ready Retrieval-Augmented Generation pipeline using
-        LangChain and Gemini Pro with document intelligence.
-      </p>
-      <span>LangChain · Gemini · RAG · Vector DB</span>
-      <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank">View on GitHub</a>
-    </div>
-
-    <div class="project-card">
-      <h3>Email Spam Classifier</h3>
-      <p>
-        NLP-based spam detection engine achieving 95%+ accuracy with Streamlit UI.
-      </p>
-      <span>NLP · TF-IDF · Naive Bayes · Streamlit</span>
-      <a href="https://github.com/Subodhtiwari2003/Email-Spam-classifier" target="_blank">View on GitHub</a>
+      <p>Production-ready RAG system with observability, vector search, and LLM orchestration.</p>
+      <span>LangChain · Gemini · FastAPI · ChromaDB</span>
+      <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank">View Project</a>
     </div>
 
     <div class="project-card">
       <h3>ATS Resume Tracker</h3>
-      <p>
-        Resume parsing and scoring system simulating ATS behavior.
-      </p>
-      <span>Python · NLP · ML</span>
-      <a href="https://github.com/Subodhtiwari2003/ATS-Resume-Tracking-project" target="_blank">View on GitHub</a>
+      <p>AI-powered resume tracking and keyword matching system.</p>
+      <span>Python · NLP · Streamlit</span>
+      <a href="https://github.com/Subodhtiwari2003/ATS-Resume-Tracking-project" target="_blank">View Project</a>
     </div>
 
     <div class="project-card">
-      <h3>LangChain Gemini App</h3>
-      <p>
-        Multi-application GenAI platform with QA, invoice extraction and vision AI.
-      </p>
-      <span>LangChain · Gemini · FastAPI</span>
-      <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank">View on GitHub</a>
+      <h3>LangChain Gemini LLM App</h3>
+      <p>Multi-module GenAI application including QA, Vision, and Invoice extraction.</p>
+      <span>LangChain · Gemini Pro · Streamlit</span>
+      <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <h3>Email Spam Classifier</h3>
+      <p>95%+ accuracy spam detection system with real-time UI.</p>
+      <span>NLP · TF-IDF · Naive Bayes</span>
+      <a href="https://github.com/Subodhtiwari2003/Email-Spam-classifier" target="_blank">View Project</a>
     </div>
 
   </div>
 </section>
 
-<!-- GITHUB -->
-<section id="github" class="github">
+<!-- ===== GITHUB ===== -->
+<section id="github" class="section">
   <h2 class="section-title">GitHub Stats</h2>
 
   <div class="github-stats">
-    <img src="https://github-readme-stats.vercel.app/api?username=Subodhtiwari2003&show_icons=true&theme=radical">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Subodhtiwari2003&layout=compact&theme=radical">
+    <img src="https://github-readme-stats.vercel.app/api?username=Subodhtiwari2003&show_icons=true&theme=tokyonight"/>
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Subodhtiwari2003&layout=compact&theme=tokyonight"/>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact">
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section">
   <h2 class="section-title">Contact Me</h2>
 
-  <form name="contact" method="POST" data-netlify="true">
+  <form class="contact-form" name="contact" method="POST" data-netlify="true">
     <input type="hidden" name="form-name" value="contact">
-
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
     <textarea name="message" placeholder="Your Message" required></textarea>
-
     <button type="submit">Send Message</button>
   </form>
 
-  <div class="socials">
+  <div class="social-links">
     <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank">LinkedIn</a>
     <a href="https://github.com/Subodhtiwari2003" target="_blank">GitHub</a>
   </div>
