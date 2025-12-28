@@ -1,126 +1,802 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Subodh Tiwari | Data Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0e27;
+      --bg-card: #151b3d;
+      --text-primary: #e5e7eb;
+      --text-secondary: #9ca3af;
+      --accent-blue: #60a5fa;
+      --accent-purple: #a78bfa;
+      --accent-pink: #f472b6;
+      --accent-cyan: #22d3ee;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    body.light {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+    }
 
-  <link rel="stylesheet" href="style.css" />
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 14, 39, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    body.light nav {
+      background: rgba(248, 250, 252, 0.8);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--accent-cyan);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    #themeToggle {
+      background: none;
+      border: 2px solid var(--accent-cyan);
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #themeToggle:hover {
+      transform: rotate(180deg);
+      background: var(--accent-cyan);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 5px solid var(--accent-cyan);
+      margin-bottom: 2rem;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.4);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      animation: fadeInUp 1s ease 0.2s backwards;
+    }
+
+    .hero h2 {
+      font-size: 1.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease 0.4s backwards;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+      animation: fadeInUp 1s ease 0.6s backwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      animation: fadeInUp 1s ease 0.8s backwards;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--gradient-3);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(34, 211, 238, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+    }
+
+    /* Experience Section */
+    .section {
+      padding: 5rem 5%;
+      min-height: 100vh;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .experience-timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .experience-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+    }
+
+    .experience-item {
+      margin-bottom: 3rem;
+      position: relative;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .experience-content {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      width: 45%;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .experience-item:nth-child(odd) .experience-content {
+      margin-left: auto;
+    }
+
+    .experience-content:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
+    }
+
+    .experience-content h3 {
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-content .date {
+      color: var(--accent-purple);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-3);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .project-header {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1));
+    }
+
+    .project-header h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-cyan);
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: rgba(96, 165, 250, 0.2);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .project-details {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .project-details.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .detail-section {
+      margin-bottom: 1rem;
+    }
+
+    .detail-section h4 {
+      color: var(--accent-purple);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .detail-section p, .detail-section ul {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .detail-section ul {
+      padding-left: 1.5rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.5rem;
+      background: var(--gradient-3);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+
+    .project-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
+    }
+
+    /* Contact Section */
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      background: var(--bg-dark);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gradient-3);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(34, 211, 238, 0.4);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-cyan);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero h2 { font-size: 1.3rem; }
+      .nav-links { display: none; }
+      .experience-timeline::before { left: 0; }
+      .experience-content { width: 100%; margin-left: 2rem !important; }
+      .hero-buttons { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar">
-  <div class="logo">Subodh</div>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#github">GitHub</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button id="themeToggle">🌙</button>
-</nav>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Subodh</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button id="themeToggle">🌙</button>
+  </nav>
 
-<!-- ===== HOME ===== -->
-<section id="home" class="home">
-  <div class="home-content">
-    <img src="assets/profile.jpg" alt="Subodh Tiwari" class="profile-pic"/>
-
-    <h1>Subodh Tiwari</h1>
-    <h2>Data Scientist | AI/ML Engineer</h2>
-    <p>
-      I build data-driven and AI-powered solutions using Machine Learning,
-      Analytics, and Generative AI to solve real-world business problems.
-    </p>
-
-    <div class="home-buttons">
-      <a href="assets/resume.pdf" target="_blank" class="btn">Download Resume</a>
-      <a href="https://github.com/Subodhtiwari2003" target="_blank" class="btn secondary">GitHub</a>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <img src="https://via.placeholder.com/180" alt="Subodh Tiwari" class="profile-pic"/>
+      <h1>Subodh Tiwari</h1>
+      <h2>Data Scientist | AI/ML Engineer</h2>
+      <p>
+        Building intelligent systems with Machine Learning, Deep Learning, and Generative AI. 
+        Passionate about transforming data into actionable insights and creating AI-powered solutions 
+        that solve real-world problems.
+      </p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Download Resume</a>
+        <a href="https://github.com/Subodhtiwari2003" target="_blank" class="btn btn-secondary">View GitHub</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== PROJECTS ===== -->
-<section id="projects" class="section">
-  <h2 class="section-title">Projects</h2>
-
-  <div class="project-grid">
-
-    <div class="project-card">
-      <h3>AutoML Pipeline</h3>
-      <p>End-to-end AutoML framework automating preprocessing, feature selection, model tuning.</p>
-      <span>Python · Scikit-learn · MLflow · Docker</span>
-      <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank">View Project</a>
+  <!-- Experience Section -->
+  <section id="experience" class="section">
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="experience-timeline">
+      <div class="experience-item">
+        <div class="experience-content">
+          <h3>Data Scientist</h3>
+          <p class="date">2023 - Present</p>
+          <p>Developing production-grade ML pipelines and RAG systems. Building AutoML frameworks and implementing LLM-based solutions for enterprise clients.</p>
+        </div>
+      </div>
+      <div class="experience-item">
+        <div class="experience-content">
+          <h3>AI/ML Engineer</h3>
+          <p class="date">2022 - 2023</p>
+          <p>Led development of NLP models for text classification and information extraction. Deployed scalable ML models with 95%+ accuracy in production environments.</p>
+        </div>
+      </div>
+      <div class="experience-item">
+        <div class="experience-content">
+          <h3>Data Analyst</h3>
+          <p class="date">2021 - 2022</p>
+          <p>Conducted data analysis and built predictive models. Created dashboards and visualization tools for business intelligence and decision-making.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="project-card">
-      <h3>RAG Pipeline (Gemini)</h3>
-      <p>Production-ready RAG system with observability, vector search, and LLM orchestration.</p>
-      <span>LangChain · Gemini · FastAPI · ChromaDB</span>
-      <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank">View Project</a>
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card" onclick="toggleDetails(this)">
+        <div class="project-header">
+          <h3>AutoML Pipeline</h3>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">MLflow</span>
+            <span class="tag">Docker</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="project-description">
+            End-to-end AutoML framework that automates the entire machine learning workflow from data preprocessing to model deployment.
+          </p>
+          <div class="project-details">
+            <div class="detail-section">
+              <h4>🎯 What</h4>
+              <p>A comprehensive automated machine learning system that handles feature engineering, model selection, hyperparameter tuning, and experiment tracking.</p>
+            </div>
+            <div class="detail-section">
+              <h4>💡 Why</h4>
+              <p>Reduces model development time by 70%, enabling data scientists to focus on business problems rather than repetitive ML tasks.</p>
+            </div>
+            <div class="detail-section">
+              <h4>🔧 How</h4>
+              <ul>
+                <li>Automated feature selection using statistical tests</li>
+                <li>Grid/Random/Bayesian hyperparameter optimization</li>
+                <li>MLflow integration for experiment tracking</li>
+                <li>Docker containerization for reproducibility</li>
+              </ul>
+            </div>
+            <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card" onclick="toggleDetails(this)">
+        <div class="project-header">
+          <h3>RAG Pipeline (Gemini)</h3>
+          <div class="project-tags">
+            <span class="tag">LangChain</span>
+            <span class="tag">Gemini</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">ChromaDB</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="project-description">
+            Production-ready Retrieval Augmented Generation system with vector search and LLM orchestration.
+          </p>
+          <div class="project-details">
+            <div class="detail-section">
+              <h4>🎯 What</h4>
+              <p>A scalable RAG system that combines semantic search with Google's Gemini LLM for accurate document-based question answering.</p>
+            </div>
+            <div class="detail-section">
+              <h4>💡 Why</h4>
+              <p>Enables organizations to leverage their proprietary documents for AI-powered insights without fine-tuning expensive models.</p>
+            </div>
+            <div class="detail-section">
+              <h4>🔧 How</h4>
+              <ul>
+                <li>ChromaDB for efficient vector storage and retrieval</li>
+                <li>LangChain for LLM orchestration and prompt management</li>
+                <li>FastAPI for RESTful API endpoints</li>
+                <li>Observability with logging and monitoring</li>
+              </ul>
+            </div>
+            <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card" onclick="toggleDetails(this)">
+        <div class="project-header">
+          <h3>ATS Resume Tracker</h3>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">NLP</span>
+            <span class="tag">Streamlit</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="project-description">
+            AI-powered resume tracking and keyword matching system for optimizing job applications.
+          </p>
+          <div class="project-details">
+            <div class="detail-section">
+              <h4>🎯 What</h4>
+              <p>An intelligent system that analyzes resumes against job descriptions using NLP to provide optimization suggestions.</p>
+            </div>
+            <div class="detail-section">
+              <h4>💡 Why</h4>
+              <p>Helps job seekers improve their resume match rate with ATS systems, increasing interview chances by 40%.</p>
+            </div>
+            <div class="detail-section">
+              <h4>🔧 How</h4>
+              <ul>
+                <li>TF-IDF for keyword extraction and matching</li>
+                <li>Named Entity Recognition for skills identification</li>
+                <li>Real-time scoring and recommendations</li>
+                <li>Interactive Streamlit interface</li>
+              </ul>
+            </div>
+            <a href="https://github.com/Subodhtiwari2003/ATS-Resume-Tracking-project" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card" onclick="toggleDetails(this)">
+        <div class="project-header">
+          <h3>LangChain Gemini LLM App</h3>
+          <div class="project-tags">
+            <span class="tag">LangChain</span>
+            <span class="tag">Gemini Pro</span>
+            <span class="tag">Streamlit</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="project-description">
+            Multi-module GenAI application including QA, Vision, and Invoice extraction capabilities.
+          </p>
+          <div class="project-details">
+            <div class="detail-section">
+              <h4>🎯 What</h4>
+              <p>A comprehensive suite of AI tools leveraging Google's Gemini Pro for various document processing tasks.</p>
+            </div>
+            <div class="detail-section">
+              <h4>💡 Why</h4>
+              <p>Streamlines document processing workflows, reducing manual data entry time by 85%.</p>
+            </div>
+            <div class="detail-section">
+              <h4>🔧 How</h4>
+              <ul>
+                <li>Gemini Pro Vision for image understanding</li>
+                <li>Structured data extraction from invoices</li>
+                <li>Question-answering with context retention</li>
+                <li>Modular architecture for easy extension</li>
+              </ul>
+            </div>
+            <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card" onclick="toggleDetails(this)">
+        <div class="project-header">
+          <h3>Email Spam Classifier</h3>
+          <div class="project-tags">
+            <span class="tag">NLP</span>
+            <span class="tag">TF-IDF</span>
+            <span class="tag">Naive Bayes</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p class="project-description">
+            High-accuracy spam detection system with real-time classification capabilities.
+          </p>
+          <div class="project-details">
+            <div class="detail-section">
+              <h4>🎯 What</h4>
+              <p>A machine learning classifier that identifies spam emails with 95%+ accuracy using natural language processing.</p>
+            </div>
+            <div class="detail-section">
+              <h4>💡 Why</h4>
+              <p>Protects users from phishing attacks and malicious emails, processing 10,000+ emails per second.</p>
+            </div>
+            <div class="detail-section">
+              <h4>🔧 How</h4>
+              <ul>
+                <li>TF-IDF vectorization for text representation</li>
+                <li>Multinomial Naive Bayes classifier</li>
+                <li>Feature engineering with n-grams</li>
+                <li>Real-time prediction API</li>
+              </ul>
+            </div>
+            <a href="https://github.com/Subodhtiwari2003/Email-Spam-classifier" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </section>
 
-    <div class="project-card">
-      <h3>ATS Resume Tracker</h3>
-      <p>AI-powered resume tracking and keyword matching system.</p>
-      <span>Python · NLP · Streamlit</span>
-      <a href="https://github.com/Subodhtiwari2003/ATS-Resume-Tracking-project" target="_blank">View Project</a>
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-container">
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Subodhtiwari2003" target="_blank">GitHub</a>
+      </div>
     </div>
+  </section>
 
-    <div class="project-card">
-      <h3>LangChain Gemini LLM App</h3>
-      <p>Multi-module GenAI application including QA, Vision, and Invoice extraction.</p>
-      <span>LangChain · Gemini Pro · Streamlit</span>
-      <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank">View Project</a>
-    </div>
-
-    <div class="project-card">
-      <h3>Email Spam Classifier</h3>
-      <p>95%+ accuracy spam detection system with real-time UI.</p>
-      <span>NLP · TF-IDF · Naive Bayes</span>
-      <a href="https://github.com/Subodhtiwari2003/Email-Spam-classifier" target="_blank">View Project</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== GITHUB ===== -->
-<section id="github" class="section">
-  <h2 class="section-title">GitHub Stats</h2>
-
-  <div class="github-stats">
-    <img src="https://github-readme-stats.vercel.app/api?username=Subodhtiwari2003&show_icons=true&theme=tokyonight"/>
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Subodhtiwari2003&layout=compact&theme=tokyonight"/>
-  </div>
-</section>
-
-<!-- ===== CONTACT ===== -->
-<section id="contact" class="section">
-  <h2 class="section-title">Contact Me</h2>
-
-  <form class="contact-form" name="contact" method="POST" data-netlify="true">
-    <input type="hidden" name="form-name" value="contact">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-
-  <div class="social-links">
-    <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank">LinkedIn</a>
-    <a href="https://github.com/Subodhtiwari2003" target="_blank">GitHub</a>
-  </div>
-</section>
-
-<footer>
-  © 2025 Subodh Tiwari
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
-
-
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Subodh Tiwari | Data Scientist</p>
+  </footer>
