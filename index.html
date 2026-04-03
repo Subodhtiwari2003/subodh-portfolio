@@ -1,795 +1,853 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Subodh Tiwari | Data Scientist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0e27;
-      --bg-card: #151b3d;
-      --text-primary: #e5e7eb;
-      --text-secondary: #9ca3af;
-      --accent-blue: #60a5fa;
-      --accent-purple: #a78bfa;
-      --accent-pink: #f472b6;
-      --accent-cyan: #22d3ee;
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-
-    body.light {
-      --bg-dark: #f8fafc;
-      --bg-card: #ffffff;
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10, 14, 39, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    body.light nav {
-      background: rgba(248, 250, 252, 0.8);
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: var(--gradient-3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent-cyan);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: var(--accent-cyan);
-      transition: width 0.3s;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    #themeToggle {
-      background: none;
-      border: 2px solid var(--accent-cyan);
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      padding: 0.5rem;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    #themeToggle:hover {
-      transform: rotate(180deg);
-      background: var(--accent-cyan);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 5%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-content {
-      text-align: center;
-      z-index: 2;
-      animation: fadeInUp 1s ease;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .profile-pic {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 5px solid var(--accent-cyan);
-      margin-bottom: 2rem;
-      animation: float 3s ease-in-out infinite;
-      box-shadow: 0 0 40px rgba(34, 211, 238, 0.4);
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-      animation: fadeInUp 1s ease 0.2s backwards;
-    }
-
-    .hero h2 {
-      font-size: 1.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-      animation: fadeInUp 1s ease 0.4s backwards;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      line-height: 1.8;
-      animation: fadeInUp 1s ease 0.6s backwards;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      animation: fadeInUp 1s ease 0.8s backwards;
-    }
-
-    .btn {
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s;
-      border: 2px solid transparent;
-    }
-
-    .btn-primary {
-      background: var(--gradient-3);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(34, 211, 238, 0.4);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
-
-    .btn-secondary:hover {
-      background: var(--accent-cyan);
-      color: var(--bg-dark);
-    }
-
-    /* Experience Section */
-    .section {
-      padding: 5rem 5%;
-      min-height: 100vh;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      background: var(--gradient-2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .experience-timeline {
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .experience-timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
-    }
-
-    .experience-item {
-      margin-bottom: 3rem;
-      position: relative;
-      animation: fadeInUp 0.6s ease;
-    }
-
-    .experience-content {
-      background: var(--bg-card);
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.1);
-      width: 45%;
-      position: relative;
-      transition: all 0.3s;
-    }
-
-    .experience-item:nth-child(odd) .experience-content {
-      margin-left: auto;
-    }
-
-    .experience-content:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
-    }
-
-    .experience-content h3 {
-      color: var(--accent-cyan);
-      margin-bottom: 0.5rem;
-    }
-
-    .experience-content .date {
-      color: var(--accent-purple);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      font-family: 'Space Mono', monospace;
-    }
-
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 1px solid rgba(255,255,255,0.1);
-      position: relative;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--gradient-3);
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .project-header {
-      padding: 1.5rem;
-      background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1));
-    }
-
-    .project-header h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent-cyan);
-    }
-
-    .project-tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-
-    .tag {
-      background: rgba(96, 165, 250, 0.2);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      color: var(--accent-cyan);
-      border: 1px solid var(--accent-cyan);
-    }
-
-    .project-body {
-      padding: 1.5rem;
-    }
-
-    .project-description {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .project-details {
-      display: none;
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .project-details.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .detail-section {
-      margin-bottom: 1rem;
-    }
-
-    .detail-section h4 {
-      color: var(--accent-purple);
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-    }
-
-    .detail-section p, .detail-section ul {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    .detail-section ul {
-      padding-left: 1.5rem;
-    }
-
-    .project-link {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1.5rem;
-      background: var(--gradient-3);
-      color: white;
-      text-decoration: none;
-      border-radius: 20px;
-      transition: all 0.3s;
-    }
-
-    .project-link:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
-    }
-
-    /* Contact Section */
-    .contact-container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-form {
-      background: var(--bg-card);
-      padding: 2rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1rem;
-      background: var(--bg-dark);
-      border: 2px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      color: var(--text-primary);
-      font-family: 'Poppins', sans-serif;
-      transition: all 0.3s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
-    }
-
-    .form-group textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 1rem;
-      background: var(--gradient-3);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(34, 211, 238, 0.4);
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .social-links a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-size: 1.5rem;
-      transition: all 0.3s;
-    }
-
-    .social-links a:hover {
-      color: var(--accent-cyan);
-      transform: translateY(-3px);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--bg-card);
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .hero h2 { font-size: 1.3rem; }
-      .nav-links { display: none; }
-      .experience-timeline::before { left: 0; }
-      .experience-content { width: 100%; margin-left: 2rem !important; }
-      .hero-buttons { flex-direction: column; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Subodh Tiwari | GenAI / Agentic AI Engineer</title>
+<meta name="description" content="Subodh Tiwari — GenAI & Agentic AI Engineer. Production RAG pipelines, multi-agent systems, LLM evaluation frameworks."/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset & Tokens ──────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:        #04070f;
+  --bg1:       #080d1a;
+  --bg2:       #0d1528;
+  --border:    rgba(99,179,255,.13);
+  --border2:   rgba(99,179,255,.22);
+  --text:      #e2eaf6;
+  --muted:     #7b91b0;
+  --cyan:      #38bdf8;
+  --blue:      #818cf8;
+  --purple:    #a78bfa;
+  --green:     #34d399;
+  --amber:     #fbbf24;
+  --pink:      #f472b6;
+  --glow-c:    rgba(56,189,248,.22);
+  --glow-p:    rgba(167,139,250,.18);
+  --card:      rgba(13,21,40,.85);
+  --pill-bg:   rgba(56,189,248,.1);
+  --radius:    14px;
+  --mono:      'JetBrains Mono', monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.65}
+a{text-decoration:none;color:inherit}
+img{display:block}
+ul{list-style:none}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg1)}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:4px}
+
+/* ── Noise overlay ───────────────────────────────────────────── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4
+}
+
+/* ── Grid lines BG ───────────────────────────────────────────── */
+.grid-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(56,189,248,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(56,189,248,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;width:100%;z-index:100;
+  background:rgba(4,7,15,.72);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  padding:.85rem 6%;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nav-logo{
+  font-family:var(--mono);font-size:.95rem;font-weight:600;
+  color:var(--cyan);letter-spacing:.06em;
+}
+.nav-logo span{color:var(--purple)}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{
+  font-size:.85rem;font-weight:500;color:var(--muted);
+  letter-spacing:.04em;transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{
+  padding:.45rem 1.1rem;border:1px solid var(--cyan);
+  border-radius:8px;color:var(--cyan)!important;
+  font-size:.82rem!important;transition:all .2s!important;
+}
+.nav-cta:hover{background:var(--cyan);color:var(--bg)!important}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:7rem 6% 4rem;position:relative;overflow:hidden;
+}
+.hero-orb{
+  position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;
+}
+.orb1{width:520px;height:520px;background:rgba(56,189,248,.07);top:-80px;right:-120px}
+.orb2{width:420px;height:420px;background:rgba(167,139,250,.07);bottom:-60px;left:-80px}
+.hero-content{
+  max-width:780px;z-index:1;
+  animation:fadeUp .9s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid var(--border2);
+  background:rgba(56,189,248,.07);
+  padding:.35rem .9rem;border-radius:50px;
+  font-size:.78rem;font-family:var(--mono);color:var(--cyan);
+  letter-spacing:.06em;margin-bottom:1.6rem;
+}
+.hero-badge::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 8px var(--green);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.1;
+  letter-spacing:-.03em;margin-bottom:1rem;
+}
+.hero h1 .name{
+  background:linear-gradient(135deg,var(--cyan) 0%,var(--blue) 50%,var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero h1 .role{color:var(--text)}
+.hero-desc{
+  font-size:1.05rem;color:var(--muted);line-height:1.8;
+  max-width:620px;margin-bottom:1.8rem;
+}
+.hero-desc strong{color:var(--text);font-weight:600}
+.hero-stats{
+  display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;
+  padding:1.2rem 1.5rem;
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  backdrop-filter:blur(10px);
+}
+.stat{text-align:center}
+.stat-val{
+  font-size:1.6rem;font-weight:800;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-family:var(--mono);
+}
+.stat-lbl{font-size:.72rem;color:var(--muted);letter-spacing:.06em;margin-top:.1rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  padding:.7rem 1.8rem;
+  background:linear-gradient(135deg,var(--cyan),var(--blue));
+  color:#04070f;font-weight:700;font-size:.9rem;
+  border-radius:10px;transition:all .25s;border:none;cursor:pointer;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(56,189,248,.35)}
+.btn-outline{
+  padding:.7rem 1.8rem;
+  border:1px solid var(--border2);color:var(--text);
+  font-weight:600;font-size:.9rem;border-radius:10px;
+  transition:all .25s;background:transparent;cursor:pointer;
+}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(56,189,248,.06)}
+
+/* ── SECTION COMMON ──────────────────────────────────────────── */
+section{padding:5.5rem 6%;position:relative;z-index:1}
+.section-label{
+  font-family:var(--mono);font-size:.75rem;color:var(--cyan);
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem;
+}
+.section-title{
+  font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;
+  letter-spacing:-.025em;margin-bottom:.6rem;
+}
+.section-sub{font-size:.95rem;color:var(--muted);max-width:560px;margin-bottom:3rem}
+
+/* ── FEATURED PROJECTS (top 2) ───────────────────────────────── */
+.featured-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;margin-bottom:2rem;
+}
+.feat-card{
+  background:var(--card);
+  border:1px solid var(--border);border-radius:20px;
+  overflow:hidden;
+  transition:all .3s;
+  position:relative;
+}
+.feat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.feat-card.rag::before{background:linear-gradient(90deg,var(--cyan),var(--blue))}
+.feat-card.agent::before{background:linear-gradient(90deg,var(--purple),var(--pink))}
+.feat-card:hover{
+  transform:translateY(-5px);
+  border-color:var(--border2);
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+.feat-head{
+  padding:1.6rem 1.6rem 1rem;
+  background:linear-gradient(160deg,rgba(56,189,248,.05) 0%,transparent 100%);
+}
+.feat-card.agent .feat-head{
+  background:linear-gradient(160deg,rgba(167,139,250,.05) 0%,transparent 100%);
+}
+.feat-eyebrow{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:.5rem;
+}
+.feat-card.rag .feat-eyebrow{color:var(--cyan)}
+.feat-card.agent .feat-eyebrow{color:var(--purple)}
+.feat-title{font-size:1.3rem;font-weight:700;margin-bottom:.5rem}
+.feat-problem{
+  font-size:.82rem;color:var(--muted);
+  background:rgba(251,191,36,.05);
+  border-left:2px solid var(--amber);
+  padding:.5rem .75rem;border-radius:0 6px 6px 0;
+  margin-bottom:.9rem;line-height:1.55;
+}
+.feat-problem strong{color:var(--amber)}
+.tag-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
+.tag{
+  font-size:.72rem;font-family:var(--mono);
+  padding:.25rem .65rem;border-radius:6px;
+  background:var(--pill-bg);color:var(--cyan);
+  border:1px solid rgba(56,189,248,.2);
+}
+.tag.purple{background:rgba(167,139,250,.1);color:var(--purple);border-color:rgba(167,139,250,.2)}
+.tag.green{background:rgba(52,211,153,.08);color:var(--green);border-color:rgba(52,211,153,.2)}
+.tag.amber{background:rgba(251,191,36,.08);color:var(--amber);border-color:rgba(251,191,36,.2)}
+.feat-body{padding:0 1.6rem 1.4rem}
+.metric-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:.7rem;margin-bottom:1rem;
+}
+.metric{
+  background:rgba(4,7,15,.6);
+  border:1px solid var(--border);border-radius:10px;
+  padding:.7rem .5rem;text-align:center;
+}
+.metric-val{
+  font-size:1.15rem;font-weight:800;font-family:var(--mono);
+  color:var(--cyan);
+}
+.feat-card.agent .metric-val{color:var(--purple)}
+.metric-lbl{font-size:.65rem;color:var(--muted);margin-top:.15rem;line-height:1.3}
+.bullet-list{margin-bottom:1.1rem}
+.bullet-list li{
+  font-size:.83rem;color:var(--muted);
+  padding:.28rem 0 .28rem 1.1rem;
+  position:relative;line-height:1.5;
+}
+.bullet-list li::before{
+  content:'—';position:absolute;left:0;color:var(--cyan);font-weight:700;
+}
+.feat-card.agent .bullet-list li::before{color:var(--purple)}
+.feat-footer{
+  padding:1rem 1.6rem 1.3rem;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:1rem;
+}
+.arch-badge{
+  font-size:.72rem;font-family:var(--mono);
+  background:rgba(52,211,153,.07);color:var(--green);
+  border:1px solid rgba(52,211,153,.2);
+  padding:.3rem .7rem;border-radius:6px;
+}
+.gh-link{
+  margin-left:auto;
+  font-size:.8rem;color:var(--muted);
+  border:1px solid var(--border);border-radius:8px;
+  padding:.35rem .9rem;transition:all .2s;display:flex;align-items:center;gap:.4rem;
+}
+.gh-link:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(56,189,248,.06)}
+
+/* ── OTHER PROJECTS ──────────────────────────────────────────── */
+.other-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:1.2rem;
+}
+.proj-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.4rem;transition:all .3s;
+}
+.proj-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.proj-card h4{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.proj-card p{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:.9rem}
+.proj-gh{
+  font-size:.75rem;font-family:var(--mono);color:var(--cyan);
+  border:1px solid rgba(56,189,248,.2);padding:.25rem .6rem;
+  border-radius:6px;display:inline-flex;align-items:center;gap:.35rem;transition:all .2s;
+}
+.proj-gh:hover{background:rgba(56,189,248,.08)}
+
+/* ── EXPERIENCE ──────────────────────────────────────────────── */
+.exp-card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:2rem;margin-bottom:1.5rem;
+  transition:border-color .3s;
+  position:relative;overflow:hidden;
+}
+.exp-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--cyan),var(--blue));
+}
+.exp-card:hover{border-color:var(--border2)}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;flex-wrap:wrap;gap:.5rem}
+.exp-title{font-size:1.1rem;font-weight:700;margin-bottom:.2rem}
+.exp-company{
+  display:inline-block;
+  font-size:.8rem;font-family:var(--mono);
+  background:rgba(56,189,248,.1);color:var(--cyan);
+  padding:.2rem .6rem;border-radius:6px;border:1px solid rgba(56,189,248,.2);
+}
+.exp-date{font-size:.78rem;font-family:var(--mono);color:var(--muted)}
+.exp-bullets{border-top:1px solid var(--border);padding-top:1rem}
+.exp-bullets li{
+  font-size:.86rem;color:var(--muted);
+  padding:.4rem 0 .4rem 1.2rem;position:relative;line-height:1.6;
+}
+.exp-bullets li::before{content:'▹';position:absolute;left:0;color:var(--cyan);font-size:.9rem}
+.exp-bullets strong{color:var(--text);font-weight:600}
+
+/* ── SKILLS ──────────────────────────────────────────────────── */
+.skills-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;
+}
+.skill-group{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.5rem;transition:border-color .3s;
+}
+.skill-group:hover{border-color:var(--border2)}
+.skill-group-title{
+  font-size:.72rem;font-family:var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:1rem;
+}
+.skill-group.ml .skill-group-title{color:var(--purple)}
+.skill-group.infra .skill-group-title{color:var(--green)}
+.skill-chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{
+  font-size:.76rem;font-family:var(--mono);
+  padding:.3rem .7rem;border-radius:7px;
+  background:rgba(56,189,248,.07);color:var(--text);
+  border:1px solid var(--border);
+  transition:all .2s;cursor:default;
+}
+.chip:hover{background:rgba(56,189,248,.14);border-color:rgba(56,189,248,.3);color:var(--cyan)}
+.skill-group.ml .chip:hover{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.3);color:var(--purple)}
+.skill-group.infra .chip:hover{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.3);color:var(--green)}
+
+/* ── ABOUT ───────────────────────────────────────────────────── */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start;
+}
+.about-card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;
+}
+.avatar-ring{
+  width:100px;height:100px;border-radius:50%;
+  border:2px solid var(--cyan);
+  background:linear-gradient(135deg,var(--bg2),var(--bg1));
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.6rem;margin-bottom:1.2rem;
+  box-shadow:0 0 30px var(--glow-c);
+}
+.about-name{font-size:1.3rem;font-weight:700;margin-bottom:.2rem}
+.about-role{font-size:.82rem;color:var(--cyan);font-family:var(--mono);margin-bottom:1rem}
+.about-links{display:flex;flex-direction:column;gap:.5rem}
+.about-link{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.82rem;color:var(--muted);
+  border:1px solid var(--border);border-radius:8px;
+  padding:.5rem .8rem;transition:all .2s;
+}
+.about-link:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(56,189,248,.05)}
+.about-link .icon{font-size:1rem}
+.about-text p{color:var(--muted);font-size:.93rem;line-height:1.8;margin-bottom:1rem}
+.about-text strong{color:var(--text);font-weight:600}
+.edu-block{
+  margin-top:2rem;background:var(--card);
+  border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;
+}
+.edu-item{padding:.7rem 0;border-bottom:1px solid var(--border)}
+.edu-item:last-child{border-bottom:none;padding-bottom:0}
+.edu-deg{font-size:.9rem;font-weight:600;margin-bottom:.15rem}
+.edu-school{font-size:.8rem;color:var(--cyan);font-family:var(--mono)}
+.edu-date{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+
+/* ── CONTACT ─────────────────────────────────────────────────── */
+.contact-wrap{
+  max-width:640px;margin:0 auto;text-align:center;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.contact-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.4rem;transition:all .3s;
+}
+.contact-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.contact-card .c-icon{font-size:1.8rem;margin-bottom:.5rem}
+.contact-card .c-label{font-size:.72rem;color:var(--muted);font-family:var(--mono);letter-spacing:.08em;margin-bottom:.2rem}
+.contact-card .c-val{font-size:.88rem;color:var(--cyan);font-weight:600}
+.contact-card .c-val.purple{color:var(--purple)}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer{
+  padding:2rem 6%;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+}
+footer p{font-size:.8rem;color:var(--muted)}
+footer span{font-family:var(--mono);font-size:.75rem;color:var(--cyan)}
+
+/* ── SCROLL REVEAL ───────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media(max-width:900px){
+  .featured-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  nav{padding:.75rem 4%}
+  .nav-links{display:none}
+  .hero{padding:5.5rem 4% 3rem}
+  section{padding:4rem 4%}
+  .hero-stats{gap:1.2rem}
+  .metric-row{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;text-align:center}
+}
+</style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="logo">Subodh</div>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+<div class="grid-bg"></div>
+
+<!-- ── NAV ────────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">&lt;<span>subodh</span>.ai /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">OPEN TO OPPORTUNITIES · DELHI, INDIA</div>
+    <h1>
+      <span class="name">Subodh Tiwari</span><br/>
+      <span class="role">GenAI / Agentic AI Engineer</span>
+    </h1>
+    <p class="hero-desc">
+      I ship <strong>production RAG pipelines</strong> and <strong>multi-agent systems</strong> — not just notebooks.
+      At Innodata, my retrieval architecture serves <strong>200+ enterprise users daily</strong>,
+      cut hallucination rate <strong>30%</strong> (validated on a 500-query eval harness),
+      and recovered <strong>1,000+ engineering hours/month</strong>.
+    </p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-val">200+</div><div class="stat-lbl">Daily Users<br/>Served</div></div>
+      <div class="stat"><div class="stat-val">30%</div><div class="stat-lbl">Hallucination<br/>Reduction</div></div>
+      <div class="stat"><div class="stat-val">&lt;200ms</div><div class="stat-lbl">p95 Retrieval<br/>Latency</div></div>
+      <div class="stat"><div class="stat-val">1,000+</div><div class="stat-lbl">Eng. Hours<br/>Saved/Month</div></div>
+      <div class="stat"><div class="stat-val">50K+</div><div class="stat-lbl">Enterprise<br/>Docs Indexed</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="https://github.com/Subodhtiwari2003" target="_blank" class="btn-outline">GitHub Profile</a>
+      <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank" class="btn-outline">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ───────────────────────────────────────────────── -->
+<section id="projects">
+  <div class="section-label">// Featured Work</div>
+  <h2 class="section-title">Production Systems</h2>
+  <p class="section-sub">Flagship projects with measurable production impact — built end-to-end and deployed to real users.</p>
+
+  <!-- ── Featured 2 ─────────────────────────────────────────── -->
+  <div class="featured-grid">
+
+    <!-- PROJECT 1: Enterprise RAG Pipeline -->
+    <div class="feat-card rag reveal">
+      <div class="feat-head">
+        <div class="feat-eyebrow">🏆 Flagship · Production RAG</div>
+        <h3 class="feat-title">Enterprise RAG Pipeline</h3>
+        <div class="feat-problem">
+          <strong>Problem:</strong> Naive top-k retrieval returned off-topic chunks on multi-document queries across a 50,000-doc enterprise corpus — causing visible hallucinations for 200+ daily users.
+        </div>
+        <div class="tag-row">
+          <span class="tag">LangChain</span>
+          <span class="tag">FAISS-HNSW</span>
+          <span class="tag">MCP</span>
+          <span class="tag">OpenAI GPT-4-turbo</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Docker</span>
+          <span class="tag green">LangSmith</span>
+          <span class="tag amber">MLflow</span>
+        </div>
+      </div>
+      <div class="feat-body">
+        <div class="metric-row">
+          <div class="metric"><div class="metric-val">30%↓</div><div class="metric-lbl">Hallucination rate (500-query eval)</div></div>
+          <div class="metric"><div class="metric-val">&lt;200ms</div><div class="metric-lbl">p95 latency (50 concurrent)</div></div>
+          <div class="metric"><div class="metric-val">0.79</div><div class="metric-lbl">Faithfulness score (was 0.61)</div></div>
+        </div>
+        <ul class="bullet-list">
+          <li>Architected multi-modal RAG over 50,000+ docs with semantic chunking (512-token / 64-token overlap), metadata filtering, and cross-encoder re-ranking</li>
+          <li>Integrated <strong>MCP (Model Context Protocol)</strong> for standardised tool and context injection into the LLM pipeline — enabling structured external data retrieval at inference time</li>
+          <li>Built LangSmith eval harness measuring <strong>Precision@5 and answer faithfulness</strong> on 150-sample labelled Q&amp;A set; surfaced failures pre-deployment, cutting debug sessions 60%</li>
+          <li>Decomposed monolith into 4 stateless FastAPI microservices — <strong>3× latency improvement</strong>, horizontal scale-ready with isolated failure domains</li>
+          <li>Explicit accuracy-vs-latency trade-off: MMR re-ranker added +15 ms for faithfulness gain 0.61→0.79 — documented and accepted by stakeholders</li>
+        </ul>
+      </div>
+      <div class="feat-footer">
+        <span class="arch-badge">✓ Production · 200+ users/day</span>
+        <a href="https://github.com/Subodhtiwari2003" target="_blank" class="gh-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+          GitHub →
+        </a>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: Agentic Customer Support -->
+    <div class="feat-card agent reveal">
+      <div class="feat-head">
+        <div class="feat-eyebrow">🤖 Flagship · Multi-Agent System</div>
+        <h3 class="feat-title">Agentic Customer Support System</h3>
+        <div class="feat-problem">
+          <strong>Problem:</strong> Single-agent support bot mis-routed queries and degraded resolution rate under concurrent load — zero visibility into failure modes or agent handoff bottlenecks.
+        </div>
+        <div class="tag-row">
+          <span class="tag purple">LangGraph</span>
+          <span class="tag purple">Multi-Agent</span>
+          <span class="tag purple">LangChain</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Docker Compose</span>
+          <span class="tag green">Streamlit Observability</span>
+          <span class="tag amber">HuggingFace</span>
+        </div>
+      </div>
+      <div class="feat-body">
+        <div class="metric-row">
+          <div class="metric"><div class="metric-val">40%↑</div><div class="metric-lbl">Faster resolution vs single-agent (500 test queries)</div></div>
+          <div class="metric"><div class="metric-val">90%+</div><div class="metric-lbl">Intent classifier accuracy (held-out 40-sample)</div></div>
+          <div class="metric"><div class="metric-val">p50/p95</div><div class="metric-lbl">Handoff latency tracked live</div></div>
+        </div>
+        <ul class="bullet-list">
+          <li>Designed LangGraph 3-agent orchestrator: <strong>classifier → retriever → responder</strong> with typed state, conditional routing, and retry logic on agent failure</li>
+          <li>Fine-tuned HuggingFace intent classifier on 200 labelled support queries — 90%+ accuracy on a held-out 40-sample set; integrated into the classifier node with fallback to LLM zero-shot</li>
+          <li>Streamlit real-time dashboard tracks <strong>resolution rate, p50/p95 agent handoff latency, and RAG retrieval scores</strong> — enabling root-cause isolation within a single trace</li>
+          <li>Docker Compose stack for one-command deploy; structured per-node logging surfaces failure modes across the full agentic chain</li>
+        </ul>
+      </div>
+      <div class="feat-footer">
+        <span class="arch-badge" style="background:rgba(167,139,250,.07);color:var(--purple);border-color:rgba(167,139,250,.2)">✓ LangGraph · Agentic Orchestration</span>
+        <a href="https://github.com/Subodhtiwari2003" target="_blank" class="gh-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+          GitHub →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Other Projects ─────────────────────────────────────── -->
+  <div class="section-label" style="margin-top:2.5rem;margin-bottom:1rem">// Other Projects</div>
+  <div class="other-grid">
+    <div class="proj-card reveal">
+      <div class="tag-row" style="margin-bottom:.7rem">
+        <span class="tag">LangChain</span><span class="tag">Gemini</span><span class="tag">FastAPI</span><span class="tag">ChromaDB</span>
+      </div>
+      <h4>RAG Pipeline (Gemini)</h4>
+      <p>Scalable RAG system pairing ChromaDB vector store with Gemini Pro for document Q&amp;A. LangChain orchestration with observability logging and RESTful endpoints.</p>
+      <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank" class="proj-gh">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+        View on GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="tag-row" style="margin-bottom:.7rem">
+        <span class="tag">Scikit-learn</span><span class="tag">MLflow</span><span class="tag">Optuna</span><span class="tag amber">SHAP</span>
+      </div>
+      <h4>AutoML Experimentation Pipeline</h4>
+      <p>Framework wrapping Sklearn pipelines, MLflow tracking, and Optuna HPO — cut model experimentation time 40% across 6 classification tasks vs. manual grid-search. Outputs ranked leaderboard with SHAP plots.</p>
+      <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank" class="proj-gh">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+        View on GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="tag-row" style="margin-bottom:.7rem">
+        <span class="tag purple">LangChain</span><span class="tag purple">Gemini Pro Vision</span><span class="tag">Streamlit</span>
+      </div>
+      <h4>LangChain Gemini LLM Suite</h4>
+      <p>Multi-module GenAI app covering document Q&amp;A, Gemini Vision, and invoice data extraction. Modular architecture — each tool is an independent chain with shared memory.</p>
+      <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank" class="proj-gh">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+        View on GitHub →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────────────── -->
+<section id="experience">
+  <div class="section-label">// Work History</div>
+  <h2 class="section-title">Experience</h2>
+
+  <div class="exp-card reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Generative AI / LLM Engineer</div>
+        <span class="exp-company">Innodata</span>
+      </div>
+      <div class="exp-date">Oct 2024 – Present</div>
+    </div>
+    <ul class="exp-bullets">
+      <li>Owned end-to-end design and deployment of a <strong>multi-modal RAG pipeline</strong> (LangChain + FAISS-HNSW + text-embedding-ada-002) over 50,000+ enterprise documents; reduced p95 retrieval latency 310 ms → &lt;200 ms, freeing 1,000+ engineering hours/month from manual search.</li>
+      <li>Reduced GPT-4-turbo <strong>hallucination rate 30%</strong> — measured via exact-match and faithfulness scoring on a 500-query ground-truth dataset — through semantic chunking, metadata filtering, and a cross-encoder re-ranker (faithfulness 0.61 → 0.79 on 150-sample eval set).</li>
+      <li>Improved answer accuracy 20% via iterative prompt engineering (few-shot, chain-of-thought, role-based prompts); every variant tracked in <strong>LangSmith</strong> against the same 500-query harness to prevent regressions before deployment.</li>
+      <li>Decomposed prototype monolith into <strong>4 stateless FastAPI microservices</strong> on Docker Compose — p95 &lt;200 ms under 50 concurrent users (3× improvement); designed for horizontal scaling with isolated failure domains.</li>
+      <li>Compressed model eval cycle from 3 days to <strong>&lt;4 hours</strong> using an MLflow workflow covering embedding model selection, chunk-size ablations, and re-ranker comparisons.</li>
     </ul>
-    <button id="themeToggle">🌙</button>
-  </nav>
+  </div>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <img src="https://via.placeholder.com/180" alt="Subodh Tiwari" class="profile-pic"/>
-      <h1>Subodh Tiwari</h1>
-      <h2>Data Scientist | AI/ML Engineer</h2>
+  <div class="exp-card reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Data Analyst</div>
+        <span class="exp-company">Han Digital Solutions</span>
+      </div>
+      <div class="exp-date">Jul 2024 – Oct 2024</div>
+    </div>
+    <ul class="exp-bullets">
+      <li>Improved XGBoost demand-forecast accuracy <strong>15% (MAE)</strong> by engineering 12 lag and rolling-window features over 18 months of transactional data; model adopted directly by the supply-chain team.</li>
+      <li>Eliminated a 3-hour manual weekly reporting cycle with 3 live <strong>Power BI dashboards</strong> (Python + SQL ETL), reclaiming ~25% of the 4-person analytics team's weekly capacity.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── SKILLS ─────────────────────────────────────────────────── -->
+<section id="skills">
+  <div class="section-label">// Tech Stack</div>
+  <h2 class="section-title">Skills</h2>
+  <p class="section-sub">Only skills backed by shipped code or production deployments.</p>
+
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">⚡ LLM / RAG / Agentic</div>
+      <div class="skill-chips">
+        <span class="chip">LangChain</span>
+        <span class="chip">LangGraph</span>
+        <span class="chip">LangSmith</span>
+        <span class="chip">MCP</span>
+        <span class="chip">OpenAI API</span>
+        <span class="chip">GPT-4-turbo</span>
+        <span class="chip">text-embedding-ada-002</span>
+        <span class="chip">FAISS-HNSW</span>
+        <span class="chip">ChromaDB</span>
+        <span class="chip">Semantic Chunking</span>
+        <span class="chip">Cross-encoder Re-ranking</span>
+        <span class="chip">Precision@K</span>
+        <span class="chip">Faithfulness Scoring</span>
+        <span class="chip">Prompt Engineering</span>
+        <span class="chip">RAG Eval Harnesses</span>
+        <span class="chip">Gemini Pro</span>
+      </div>
+    </div>
+    <div class="skill-group ml reveal">
+      <div class="skill-group-title">🧠 ML / NLP</div>
+      <div class="skill-chips">
+        <span class="chip">HuggingFace Transformers</span>
+        <span class="chip">Scikit-learn</span>
+        <span class="chip">XGBoost</span>
+        <span class="chip">MLflow</span>
+        <span class="chip">Optuna</span>
+        <span class="chip">SHAP</span>
+        <span class="chip">Fine-tuning</span>
+        <span class="chip">NLP Pipelines</span>
+        <span class="chip">TF-IDF</span>
+        <span class="chip">NER</span>
+      </div>
+    </div>
+    <div class="skill-group infra reveal">
+      <div class="skill-group-title">🛠 Systems / Infra</div>
+      <div class="skill-chips">
+        <span class="chip">FastAPI</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Docker Compose</span>
+        <span class="chip">REST APIs</span>
+        <span class="chip">AWS S3</span>
+        <span class="chip">AWS EC2</span>
+        <span class="chip">AWS Lambda</span>
+        <span class="chip">AWS Bedrock</span>
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Structured Logging</span>
+        <span class="chip">Streamlit</span>
+        <span class="chip">Power BI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ───────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="section-label">// Who I Am</div>
+  <h2 class="section-title">About Me</h2>
+
+  <div class="about-grid">
+    <div>
+      <div class="about-card reveal">
+        <div class="avatar-ring">🤖</div>
+        <div class="about-name">Subodh Tiwari</div>
+        <div class="about-role">GenAI / Agentic AI Engineer</div>
+        <div class="about-links">
+          <a href="mailto:kumarsubodh150403@gmail.com" class="about-link">
+            <span class="icon">✉</span> kumarsubodh150403@gmail.com
+          </a>
+          <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank" class="about-link">
+            <span class="icon">💼</span> linkedin.com/in/subodh-tiwari-
+          </a>
+          <a href="https://github.com/Subodhtiwari2003" target="_blank" class="about-link">
+            <span class="icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+            </span>
+            github.com/Subodhtiwari2003
+          </a>
+          <a href="tel:+919873559651" class="about-link">
+            <span class="icon">📱</span> +91-98735 59651
+          </a>
+        </div>
+      </div>
+
+      <div class="edu-block reveal">
+        <div class="section-label" style="margin-bottom:.8rem">// Education</div>
+        <div class="edu-item">
+          <div class="edu-deg">MCA — Artificial Intelligence &amp; Machine Learning</div>
+          <div class="edu-school">Amity University</div>
+          <div class="edu-date">2025 – 2026 · In Progress</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">B.A. (Hons)</div>
+          <div class="edu-school">Delhi University</div>
+          <div class="edu-date">2021 – 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-text reveal">
       <p>
-        Building intelligent systems with Machine Learning, Deep Learning, and Generative AI. 
-        Passionate about transforming data into actionable insights and creating AI-powered solutions 
-        that solve real-world problems.
+        I'm a <strong>Generative AI / Agentic AI Engineer</strong> with production experience shipping
+        RAG systems and multi-agent orchestration frameworks at enterprise scale.
+        My work sits at the intersection of <strong>retrieval quality, LLM reliability, and inference efficiency</strong> —
+        the three things that determine whether a GenAI product actually works in production.
       </p>
-      <div class="hero-buttons">
-        <a href="#" class="btn btn-primary">Download Resume</a>
-        <a href="https://github.com/Subodhtiwari2003" target="_blank" class="btn btn-secondary">View GitHub</a>
-      </div>
+      <p>
+        At <strong>Innodata</strong>, I owned the full stack: from chunking strategy and embedding model selection
+        to eval harness design and microservice deployment. The system I built serves 200+ enterprise users daily
+        with validated retrieval quality metrics — not just vibes.
+      </p>
+      <p>
+        I care deeply about <strong>observability</strong>. Every system I ship includes eval harnesses,
+        LangSmith tracing, and structured logging so failures can be debugged in minutes, not days.
+        I use MLflow for reproducible experiment tracking and benchmark every architectural decision
+        against a ground-truth dataset before it touches production.
+      </p>
+      <p>
+        I'm targeting a <strong>mid-level GenAI IC or tech-lead role</strong> at a product-led company
+        where retrieval quality, agent reliability, and inference latency are first-class engineering problems —
+        not afterthoughts.
+      </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Experience Section -->
-  <section id="experience" class="section">
-    <h2 class="section-title">Professional Experience</h2>
-    <div class="experience-timeline">
-      <div class="experience-item">
-        <div class="experience-content">
-          <h3>Data Scientist</h3>
-          <p class="date">October 2024 - Present</p>
-          <p>Developing production-grade ML pipelines and RAG systems. Building AutoML frameworks and implementing LLM-based solutions for enterprise clients.</p>
+<!-- ── CONTACT ────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="section-label" style="text-align:center">// Get In Touch</div>
+    <h2 class="section-title" style="text-align:center">Let's Build Something</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 0">
+      Open to GenAI / Agentic AI engineering roles. Response within 24 hours.
+    </p>
+    <div class="contact-grid reveal">
+      <a href="mailto:kumarsubodh150403@gmail.com" class="contact-card">
+        <div class="c-icon">✉️</div>
+        <div class="c-label">Email</div>
+        <div class="c-val">kumarsubodh150403@gmail.com</div>
+      </a>
+      <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank" class="contact-card">
+        <div class="c-icon">💼</div>
+        <div class="c-label">LinkedIn</div>
+        <div class="c-val">subodh-tiwari-</div>
+      </a>
+      <a href="https://github.com/Subodhtiwari2003" target="_blank" class="contact-card">
+        <div class="c-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--cyan)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
         </div>
-      </div>
-      <div class="experience-item">
-        <div class="experience-content">
-          <h3>Process Associate</h3>
-          <p class="date">July 2024 - October 2024</p>
-          <p>Conducted data analysis and built predictive models. Created dashboards and visualization tools for business intelligence and decision-making.</p>
-        </div>
-      </div>
+        <div class="c-label">GitHub</div>
+        <div class="c-val">Subodhtiwari2003</div>
+      </a>
+      <a href="tel:+919873559651" class="contact-card">
+        <div class="c-icon">📱</div>
+        <div class="c-label">Phone</div>
+        <div class="c-val purple">+91-98735 59651</div>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="section">
-    <h2 class="section-title">Featured Projects</h2>
-    <div class="projects-grid">
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <p>© 2026 Subodh Tiwari · GenAI / Agentic AI Engineer</p>
+  <span>&lt;built with precision /&gt;</span>
+</footer>
 
-      <!-- Project 1 -->
-      <div class="project-card" onclick="toggleDetails(this)">
-        <div class="project-header">
-          <h3>AutoML Pipeline</h3>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Scikit-learn</span>
-            <span class="tag">MLflow</span>
-            <span class="tag">Docker</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <p class="project-description">
-            End-to-end AutoML framework that automates the entire machine learning workflow from data preprocessing to model deployment.
-          </p>
-          <div class="project-details">
-            <div class="detail-section">
-              <h4>🎯 What</h4>
-              <p>A comprehensive automated machine learning system that handles feature engineering, model selection, hyperparameter tuning, and experiment tracking.</p>
-            </div>
-            <div class="detail-section">
-              <h4>💡 Why</h4>
-              <p>Reduces model development time by 70%, enabling data scientists to focus on business problems rather than repetitive ML tasks.</p>
-            </div>
-            <div class="detail-section">
-              <h4>🔧 How</h4>
-              <ul>
-                <li>Automated feature selection using statistical tests</li>
-                <li>Grid/Random/Bayesian hyperparameter optimization</li>
-                <li>MLflow integration for experiment tracking</li>
-                <li>Docker containerization for reproducibility</li>
-              </ul>
-            </div>
-            <a href="https://github.com/Subodhtiwari2003/AutoMLPipeline" target="_blank" class="project-link">View on GitHub →</a>
-          </div>
-        </div>
-      </div>
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
 
-      <!-- Project 2 -->
-      <div class="project-card" onclick="toggleDetails(this)">
-        <div class="project-header">
-          <h3>RAG Pipeline (Gemini)</h3>
-          <div class="project-tags">
-            <span class="tag">LangChain</span>
-            <span class="tag">Gemini</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">ChromaDB</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <p class="project-description">
-            Production-ready Retrieval Augmented Generation system with vector search and LLM orchestration.
-          </p>
-          <div class="project-details">
-            <div class="detail-section">
-              <h4>🎯 What</h4>
-              <p>A scalable RAG system that combines semantic search with Google's Gemini LLM for accurate document-based question answering.</p>
-            </div>
-            <div class="detail-section">
-              <h4>💡 Why</h4>
-              <p>Enables organizations to leverage their proprietary documents for AI-powered insights without fine-tuning expensive models.</p>
-            </div>
-            <div class="detail-section">
-              <h4>🔧 How</h4>
-              <ul>
-                <li>ChromaDB for efficient vector storage and retrieval</li>
-                <li>LangChain for LLM orchestration and prompt management</li>
-                <li>FastAPI for RESTful API endpoints</li>
-                <li>Observability with logging and monitoring</li>
-              </ul>
-            </div>
-            <a href="https://github.com/Subodhtiwari2003/RAGPipeline_Gemini" target="_blank" class="project-link">View on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="project-card" onclick="toggleDetails(this)">
-        <div class="project-header">
-          <h3>ATS Resume Tracker</h3>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">NLP</span>
-            <span class="tag">Streamlit</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <p class="project-description">
-            AI-powered resume tracking and keyword matching system for optimizing job applications.
-          </p>
-          <div class="project-details">
-            <div class="detail-section">
-              <h4>🎯 What</h4>
-              <p>An intelligent system that analyzes resumes against job descriptions using NLP to provide optimization suggestions.</p>
-            </div>
-            <div class="detail-section">
-              <h4>💡 Why</h4>
-              <p>Helps job seekers improve their resume match rate with ATS systems, increasing interview chances by 40%.</p>
-            </div>
-            <div class="detail-section">
-              <h4>🔧 How</h4>
-              <ul>
-                <li>TF-IDF for keyword extraction and matching</li>
-                <li>Named Entity Recognition for skills identification</li>
-                <li>Real-time scoring and recommendations</li>
-                <li>Interactive Streamlit interface</li>
-              </ul>
-            </div>
-            <a href="https://github.com/Subodhtiwari2003/ATS-Resume-Tracking-project" target="_blank" class="project-link">View on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="project-card" onclick="toggleDetails(this)">
-        <div class="project-header">
-          <h3>LangChain Gemini LLM App</h3>
-          <div class="project-tags">
-            <span class="tag">LangChain</span>
-            <span class="tag">Gemini Pro</span>
-            <span class="tag">Streamlit</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <p class="project-description">
-            Multi-module GenAI application including QA, Vision, and Invoice extraction capabilities.
-          </p>
-          <div class="project-details">
-            <div class="detail-section">
-              <h4>🎯 What</h4>
-              <p>A comprehensive suite of AI tools leveraging Google's Gemini Pro for various document processing tasks.</p>
-            </div>
-            <div class="detail-section">
-              <h4>💡 Why</h4>
-              <p>Streamlines document processing workflows, reducing manual data entry time by 85%.</p>
-            </div>
-            <div class="detail-section">
-              <h4>🔧 How</h4>
-              <ul>
-                <li>Gemini Pro Vision for image understanding</li>
-                <li>Structured data extraction from invoices</li>
-                <li>Question-answering with context retention</li>
-                <li>Modular architecture for easy extension</li>
-              </ul>
-            </div>
-            <a href="https://github.com/Subodhtiwari2003/Langchain-GeminiLLMAPP" target="_blank" class="project-link">View on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 5 -->
-      <div class="project-card" onclick="toggleDetails(this)">
-        <div class="project-header">
-          <h3>Email Spam Classifier</h3>
-          <div class="project-tags">
-            <span class="tag">NLP</span>
-            <span class="tag">TF-IDF</span>
-            <span class="tag">Naive Bayes</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <p class="project-description">
-            High-accuracy spam detection system with real-time classification capabilities.
-          </p>
-          <div class="project-details">
-            <div class="detail-section">
-              <h4>🎯 What</h4>
-              <p>A machine learning classifier that identifies spam emails with 95%+ accuracy using natural language processing.</p>
-            </div>
-            <div class="detail-section">
-              <h4>💡 Why</h4>
-              <p>Protects users from phishing attacks and malicious emails, processing 10,000+ emails per second.</p>
-            </div>
-            <div class="detail-section">
-              <h4>🔧 How</h4>
-              <ul>
-                <li>TF-IDF vectorization for text representation</li>
-                <li>Multinomial Naive Bayes classifier</li>
-                <li>Feature engineering with n-grams</li>
-                <li>Real-time prediction API</li>
-              </ul>
-            </div>
-            <a href="https://github.com/Subodhtiwari2003/Email-Spam-classifier" target="_blank" class="project-link">View on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <h2 class="section-title">Get In Touch</h2>
-    <div class="contact-container">
-      <form class="contact-form">
-        <div class="form-group">
-          <input type="text" placeholder="Your Name" required>
-        </div>
-        <div class="form-group">
-          <input type="email" placeholder="Your Email" required>
-        </div>
-        <div class="form-group">
-          <textarea placeholder="Your Message" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Send Message</button>
-      </form>
-      <div class="social-links">
-        <a href="https://linkedin.com/in/subodh-tiwari-" target="_blank">LinkedIn</a>
-        <a href="https://github.com/Subodhtiwari2003" target="_blank">GitHub</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Subodh Tiwari | Data Scientist</p>
-  </footer>
+// Nav active state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? 'var(--cyan)' : '';
+  });
+});
+</script>
+</body>
+</html>
